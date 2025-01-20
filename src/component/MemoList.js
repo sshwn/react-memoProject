@@ -1,9 +1,16 @@
-function MemoList({memos}) {
-    console.log("테스트입니다" + memos[0].title);
+import MemoItem from "./MemoItem";
+
+function MemoList({memos, setSelectedMemoIndex, selectedMemoIndex}) {
     return (
         <div>
             {memos.map((memo, index) => (
-                <div key={index}>{memo.title}</div>
+                <MemoItem 
+                key={index}
+                onClick={() => {
+                    setSelectedMemoIndex(index);
+                }}
+                isSelected={index === selectedMemoIndex}
+                >{memo.title}</MemoItem>
             ))}
         </div>
     );

@@ -16,12 +16,25 @@ function App() {
       createAt: 1641225309267, //시간 값
       updateAt: 1641225309267, //시간 값
     },
-])
+]);
 
+const [selectedMemoIndex, setSelectedMemoIndex] = useState(0);  // 초기값은 0 (첫번째 인덱스의 메모를 선택했다.)
+
+const setMemo = (newMemo) => {
+  const newMemos = [...memos]; // 불변성 주의하기위해 새로운 배열을 만든다.(원본 건들지않도록 주의)
+
+  newMemos[selectedMemoIndex] = newMemo;
+
+  setMemos(newMemos);
+  // 주소값이 기준이되므로 기존의 주소값을 그대로 넣어서 화면에 변경이없어 rerendering이 되지않는다고함  ... 을 붙이면 새 ref를 생성한다. 또는 원본을 복사해서 사용
+}
   return (
     <div className="App">
-      <SideBar memos={memos} />
-      <MemoContainer />
+      <SideBar 
+        memos={memos} 
+        setSelectedMemoIndex={setSelectedMemoIndex} 
+        selectedMemoIndex={selectedMemoIndex}/>
+      <MemoContainer memo={memos[selectedMemoIndex]} setMemo={setMemo} />
     </div>
   );
 }
