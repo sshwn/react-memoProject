@@ -1,7 +1,8 @@
-function SideBarFooter({memos}) {
+function SideBarFooter({onClick}) {
     return (
         <div className="SideBarFooter">
-            SideBarFooter
+            <button className="SideBarFooter_add-button"
+            onClick={onClick}>+</button>
         </div>
     );
 }

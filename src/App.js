@@ -28,10 +28,25 @@ const setMemo = (newMemo) => {
   setMemos(newMemos);
   // 주소값이 기준이되므로 기존의 주소값을 그대로 넣어서 화면에 변경이없어 rerendering이 되지않는다고함  ... 을 붙이면 새 ref를 생성한다. 또는 원본을 복사해서 사용
 }
+
+const addMemo = () => {
+  const now = new Date().getTime();
+  setMemos([
+    ...memos, 
+    {
+     title: 'Untitled',
+     content: '',
+     createAt: now,
+     updateAt: now
+    },
+  ]);
+  setSelectedMemoIndex(memos.length);
+};
   return (
     <div className="App">
       <SideBar 
         memos={memos} 
+        addMemo={addMemo}
         setSelectedMemoIndex={setSelectedMemoIndex} 
         selectedMemoIndex={selectedMemoIndex}/>
       <MemoContainer memo={memos[selectedMemoIndex]} setMemo={setMemo} />
